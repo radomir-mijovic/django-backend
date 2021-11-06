@@ -65,7 +65,7 @@ DATABASES = {
         'HOST': 'ec2-52-86-223-172.compute-1.amazonaws.com',
         'PORT': 5432,
         'USER': 'bqmgcvilbnblav',
-        'PASSWORD': 'cf73ccf4b548b8d248ec9a1d0559954b10920957db3795e7ad0622d63edce92',
+        'PASSWORD': '5cf73ccf4b548b8d248ec9a1d0559954b10920957db3795e7ad0622d63edce92',
     }
 }
 
