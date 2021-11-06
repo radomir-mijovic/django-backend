@@ -1,0 +1,1 @@
+web: frontend_mentor_backend.wsgi
