@@ -58,18 +58,16 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'frontend_mentor_backend.wsgi.application'
 
-# Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': 'd97hbqi1rp7hh4',
+        'HOST': 'ec2-52-86-223-172.compute-1.amazonaws.com',
+        'PORT': 5432,
+        'USER': 'bqmgcvilbnblav',
+        'PASSWORD': 'cf73ccf4b548b8d248ec9a1d0559954b10920957db3795e7ad0622d63edce92',
     }
 }
-
-# Password validation
-# https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -98,7 +96,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
