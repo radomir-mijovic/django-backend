@@ -1,1 +1,1 @@
-web: frontend_mentor_backend.wsgi
+web: gunicorn frontend_mentor_backend.wsgi
