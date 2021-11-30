@@ -1,19 +1,17 @@
 import os.path
 from pathlib import Path
+from django.conf import settings
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-$x+1*^*00a)c)8zip600!0x@x1zo!6%1kk(n^c87pp!u3j=np2'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     'frontend-mentor-backend.herokuapp.com',
     '127.0.0.1'
 ]
-
-# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -25,11 +23,17 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'todo_fm',
+    'product_feedback_fm',
+    'user',
+    'knox',
 ]
+
+AUTH_USER_MODEL = 'user.CommentUser'
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -69,6 +73,12 @@ DATABASES = {
     }
 }
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'knox.auth.TokenAuthentication'
+    ]
+}
+
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -84,9 +94,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# Internationalization
-# https://docs.djangoproject.com/en/3.2/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -97,12 +104,21 @@ USE_L10N = True
 
 USE_TZ = True
 
-STATIC_URL = '/static/'
+STATIC_URL = '/staticfiles/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_HEADERS = [
+    'content-disposition',
+    'content-type',
+    'authorization'
+]
 
-# CORS_ALLOWED_ORIGINS
-
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AWS_ACCESS_KEY_ID = 'AKIA3BILVY3VAZ4M7FMD'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'product-feedback-fm'
+AWS_QUERYSTRING_AUTH = False
