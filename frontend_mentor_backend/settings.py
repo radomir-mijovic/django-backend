@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'product_feedback_fm',
     'user',
     'knox',
+    'whitenoise',
 ]
 
 AUTH_USER_MODEL = 'user.CommentUser'
