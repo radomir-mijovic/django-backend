@@ -18,3 +18,4 @@ db.sqlite3
 .idea/**/dbnavigator.xml
 pip-log.txt
 pip-delete-this-directory.txt
+frontend_mentor_backend/settings.py
