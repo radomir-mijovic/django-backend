@@ -22,14 +22,28 @@ class CreateReplySerializer(serializers.ModelSerializer):
         model = Replies
         fields = '__all__'
 
+    def validate(self, attrs):
+        if len(attrs['reply']) < 10:
+            raise serializers.ValidationError({
+                'reply': 'Reply must be at least 10 character long'
+            })
+
 
 class CommentsFeedbackSerializer(serializers.ModelSerializer):
     user = slug_field('get_user_info')
     replies = RepliesFeedbackSerializer(many=True, read_only=True)
+    text = serializers.CharField(max_length=500, required=True)
 
     class Meta:
         model = Comments
         fields = '__all__'
+
+    def validate(self, attrs):
+        if len(attrs['text']) < 10:
+            raise serializers.ValidationError({
+                'text': 'Reply must be at least 10 character long'
+            })
+        return attrs
 
 
 class ReadProductsFeedbackSerializer(serializers.ModelSerializer):
@@ -55,7 +69,7 @@ class ProductsFeedbackSerializer(serializers.ModelSerializer):
     def validate(self, attrs):
         if len(attrs['title']) < 4:
             raise serializers.ValidationError({
-                'error': 'Title must be at least 4 character long'
+                'title': 'Title must be at least 4 character long'
             })
         return attrs
 

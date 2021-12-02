@@ -16,10 +16,6 @@ from .serializers import (
 from .models import *
 
 
-def get_serialized_queryset():
-    return ProductsFeedbackSerializer(ProductFeedback.objects.all(), many=True)
-
-
 class ProductsFeedbackListView(ListCreateAPIView):
 
     def get_permissions(self):
@@ -59,20 +55,23 @@ class GetUpdateDeleteFeedbackView(RetrieveUpdateDestroyAPIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def put(self, request, *args, **kwargs):
-        serializer = ProductsFeedbackSerializer(instance=self.get_object(kwargs['pk']), data=request.data)
+        serializer = ProductsFeedbackSerializer(
+            instance=self.get_object(kwargs['pk']), data=request.data
+        )
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def patch(self, request, *args, **kwargs):
-        serializer = ProductFeedbackUpVotesSerializer(instance=self.get_object(kwargs['pk']), data=request.data)
+        serializer = ProductFeedbackUpVotesSerializer(
+            instance=self.get_object(kwargs['pk']), data=request.data
+        )
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def delete(self, request, *args, **kwargs):
         self.get_object(kwargs['pk']).delete()
-        print(kwargs['pk'])
         return Response(data={'id': kwargs['pk']}, status=status.HTTP_200_OK)
 
 
